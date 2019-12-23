@@ -143,7 +143,7 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Num0] = { .scancode = Scancode::Num0, .shift = false },
 
   [(int)Keymap::Key::Enter] = { .scancode = Scancode::Enter, .shift = false },
-  [(int)Keymap::Key::Esc] = { .scancode = Scancode::Esc, .shift = false },
+  [(int)Keymap::Key::Esc] = { .scancode = Scancode::Capslock, .shift = false },
   [(int)Keymap::Key::BSpace] = { .scancode = Scancode::BSpace, .shift = false },
   [(int)Keymap::Key::Tab] = { .scancode = Scancode::Tab, .shift = false },
   [(int)Keymap::Key::Space] = { .scancode = Scancode::Space, .shift = false },
@@ -202,7 +202,7 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Down] = { .scancode = Scancode::Down, .shift = false },
   [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .shift = false },
 
-  [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Capslock, .shift = false },
+  [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Esc, .shift = false },
   [(int)Keymap::Key::SL1] = { .scancode = Scancode::End, .shift = false },
   [(int)Keymap::Key::SL2] = { .scancode = Scancode::Home, .shift = false },
   //[(int)Keymap::Key::SL3] = { .scancode = Scancode::Del, .shift = false },
@@ -280,7 +280,7 @@ void HID::sendKeys(
       case Keymap::Key::SR5:
         report.modifier |= modifers[(int)HID::Mod::RCtrl]; break;
       case Keymap::Key::SR6:
-        report.modifier |= modifers[(int)HID::Mod::RCmd]; break;
+        report.modifier |= modifers[(int)HID::Mod::RAlt]; break;
       case Keymap::Key::SL3: //remap originally delete key to left shift.
         report.modifier |= modifers[(int)HID::Mod::LShift]; break;
       case Keymap::Key::Minus: //remap originally minus key to right shift
