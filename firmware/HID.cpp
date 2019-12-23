@@ -276,9 +276,7 @@ void HID::sendKeys(
       case Keymap::Key::SR5:
         report.modifier |= modifers[(int)HID::Mod::RCtrl]; break;
       case Keymap::Key::SR6:
-        report.modifier |= modifers[(int)HID::Mod::RCmd]; break;
-      case Keymap::Key::Grave:
-        report.modifier |= modifers[(int)HID::Mod::LCtrl]; break;                      
+        report.modifier |= modifers[(int)HID::Mod::RCmd]; break;              
       
       default: {
         auto info = scancodeMap[(int)key];
