@@ -148,7 +148,7 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Tab] = { .scancode = Scancode::Tab, .shift = false },
   [(int)Keymap::Key::Space] = { .scancode = Scancode::Space, .shift = false },
   [(int)Keymap::Key::Minus] = { .scancode = Scancode::Minus, .shift = false },
-  [(int)Keymap::Key::Equal] = { .scancode = Scancode::Grave, .shift = false },
+  [(int)Keymap::Key::Equal] = { .scancode = Scancode::Equal, .shift = false },
   [(int)Keymap::Key::LBrace] = { .scancode = Scancode::LBrace, .shift = false },
   [(int)Keymap::Key::RBrace] = { .scancode = Scancode::RBrace, .shift = false },
   [(int)Keymap::Key::BSlash] = { .scancode = Scancode::BSlash, .shift = false },
@@ -264,17 +264,13 @@ void HID::sendKeys(
       case Keymap::Key::Shift:
         report.modifier |= modifers[(int)HID::Mod::Shift]; break;
       case Keymap::Key::Sym: break;
-
-      case Keymap::Key::SL2:
-        report.modifier |= modifers[(int)HID::Mod::LCtrl]; break;
+      
       case Keymap::Key::SL5:
         report.modifier |= modifers[(int)HID::Mod::LAlt]; break;
       case Keymap::Key::LShift:
         report.modifier |= modifers[(int)HID::Mod::LShift]; break;
       case Keymap::Key::SL6:
         report.modifier |= modifers[(int)HID::Mod::LCmd]; break;        
-      case Keymap::Key::SR2:
-        report.modifier |= modifers[(int)HID::Mod::RAlt]; break;
       case Keymap::Key::RShift:
         report.modifier |= modifers[(int)HID::Mod::RShift]; break;
       case Keymap::Key::SR5:
