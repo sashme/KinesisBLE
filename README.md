@@ -1,3 +1,9 @@
+This repo is a personal fork of [This fantastic work to make a Bluetooth LE version of the Kinesis Advantage](https://github.com/sysdevmike/KinesisBLE). This will track the above as closely as possible. Main changes include:
+
+- Restoring the default Kinesis layout in the master branch. Checkout my personal branch for my own take on the layout.
+- TODO: Restore bluetooth connection reset keymap
+- TODO: Restore program key for power off keymap.
+
 # Wireless Kinesis Advantage BLE (Bluetooth Low Energy)
 
 Firmware for a custom controller to turn the [Kinesis Keyboard](https://www.kinesis-ergo.com/shop/advantage2/) wireless. Written for the Adafruit nRF52 Feather Arduino board, which is built on Nordic's nRF52 SOC bluetooth module. 
