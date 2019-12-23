@@ -205,7 +205,7 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Capslock, .shift = false },
   [(int)Keymap::Key::SL1] = { .scancode = Scancode::End, .shift = false },
   [(int)Keymap::Key::SL2] = { .scancode = Scancode::Home, .shift = false },
-  [(int)Keymap::Key::SL3] = { .scancode = Scancode::Del, .shift = false },
+  //[(int)Keymap::Key::SL3] = { .scancode = Scancode::Del, .shift = false },
   [(int)Keymap::Key::SL4] = { .scancode = Scancode::BSpace, .shift = false },
   [(int)Keymap::Key::SR1] = { .scancode = Scancode::PgDn, .shift = false },
   [(int)Keymap::Key::SR2] = { .scancode = Scancode::PgUp, .shift = false },
@@ -250,7 +250,7 @@ void HID::sendKeys(
   auto oldReport = report;
   memset(&report, 0, sizeof(report));
 
-  for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 6; k++) {
+  for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 7; k++) { //what does i <7 refer to? says that row in matrix should be less than 7
     auto key = (Keymap::Key)k;
     
     auto pressed = km->pressed(key);
@@ -264,21 +264,27 @@ void HID::sendKeys(
       case Keymap::Key::Shift:
         report.modifier |= modifers[(int)HID::Mod::Shift]; break;
       case Keymap::Key::Sym: break;
-      
+
+      case Keymap::Key::LShift:
+        report.keycode[i++] = scancodes[(int)HID::Scancode::Del]; break; //this is how you remap a modifier to a normal key.
+      //case Keymap::Key::LShift:
+      //  report.modifier |= modifers[(int)HID::Mod::LShift]; break;
+      case Keymap::Key::RShift:
+        report.keycode[i++] = scancodes[(int)HID::Scancode::Minus]; break; //this is how you remap a modifier to a normal key.
+      //case Keymap::Key::RShift:
+      //  report.modifier |= modifers[(int)HID::Mod::RShift]; break;
       case Keymap::Key::SL5:
         report.modifier |= modifers[(int)HID::Mod::LAlt]; break;
-      case Keymap::Key::LShift:
-        report.modifier |= modifers[(int)HID::Mod::LShift]; break;
       case Keymap::Key::SL6:
         report.modifier |= modifers[(int)HID::Mod::LCmd]; break;        
-      case Keymap::Key::RShift:
-        report.modifier |= modifers[(int)HID::Mod::RShift]; break;
       case Keymap::Key::SR5:
         report.modifier |= modifers[(int)HID::Mod::RCtrl]; break;
       case Keymap::Key::SR6:
         report.modifier |= modifers[(int)HID::Mod::RCmd]; break;
-      case Keymap::Key::Grave:
-        report.modifier |= modifers[(int)HID::Mod::LCtrl]; break;                      
+      case Keymap::Key::SL3: //remap originally delete key to left shift.
+        report.modifier |= modifers[(int)HID::Mod::LShift]; break;
+      case Keymap::Key::Minus: //remap originally minus key to right shift
+        report.modifier |= modifers[(int)HID::Mod::RShift]; break;                          
       
       default: {
         auto info = scancodeMap[(int)key];
