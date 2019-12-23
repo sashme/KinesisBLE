@@ -71,6 +71,10 @@ const uint8_t HID::scancodes[] = {
   [(int)Scancode::F10] = 0x43,
   [(int)Scancode::F11] = 0x44,
   [(int)Scancode::F12] = 0x45,
+  [(int)Scancode::PrintScrn] = 0x46,
+  [(int)Scancode::ScrollLock] = 0x47,
+  [(int)Scancode::Pause] = 0x48,
+  [(int)Scancode::Insert] = 0x49,
   [(int)Scancode::Home] = 0x4a,
   [(int)Scancode::PgUp] = 0x4b,
   [(int)Scancode::Del] = 0x4c,
@@ -81,7 +85,7 @@ const uint8_t HID::scancodes[] = {
   [(int)Scancode::Down] = 0x51,
   [(int)Scancode::Up] = 0x52,
   [(int)Scancode::Capslock] = 0x39,
-  [(int)Scancode::Hyper] = 0x6D 
+  //[(int)Scancode::Hyper] = 0x6D //this is f18.
 };
 
 const uint8_t HID::modifers[] = {
@@ -184,9 +188,9 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::F10] = { .scancode = Scancode::F10, .shift = false },
   [(int)Keymap::Key::F11] = { .scancode = Scancode::F11, .shift = false },
   [(int)Keymap::Key::F12] = { .scancode = Scancode::F12, .shift = false },
-  [(int)Keymap::Key::PrintScr] = { .scancode = Scancode::None, .shift = false },
-  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::None, .shift = false },
-  [(int)Keymap::Key::Pause] = { .scancode = Scancode::None, .shift = false },
+  [(int)Keymap::Key::PrintScrn] = { .scancode = Scancode::PrintScrn, .shift = false },
+  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::ScrollLock, .shift = false },
+  [(int)Keymap::Key::Pause] = { .scancode = Scancode::Pause, .shift = false },
   [(int)Keymap::Key::Home] = { .scancode = Scancode::Home, .shift = false },
   [(int)Keymap::Key::PgUp] = { .scancode = Scancode::PgUp, .shift = false },
   [(int)Keymap::Key::Del] = { .scancode = Scancode::Del, .shift = false },
@@ -197,12 +201,14 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Down] = { .scancode = Scancode::Down, .shift = false },
   [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .shift = false },
 
-  [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Esc, .shift = false },
-  [(int)Keymap::Key::Insert] = { .scancode = Scancode::BSlash, .shift = false },
-  [(int)Keymap::Key::SL1] = { .scancode = Scancode::Equal, .shift = false },
-  [(int)Keymap::Key::SL3] = { .scancode = Scancode::Hyper, .shift = false },
+  [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Capslock, .shift = false },
+  [(int)Keymap::Key::Insert] = { .scancode = Scancode::Insert, .shift = false },
+  [(int)Keymap::Key::SL1] = { .scancode = Scancode::End, .shift = false },
+  [(int)Keymap::Key::SL2] = { .scancode = Scancode::Home, .shift = false },
+  [(int)Keymap::Key::SL3] = { .scancode = Scancode::Delete, .shift = false },
   [(int)Keymap::Key::SL4] = { .scancode = Scancode::BSpace, .shift = false },
-  [(int)Keymap::Key::SR1] = { .scancode = Scancode::Minus, .shift = false },
+  [(int)Keymap::Key::SR1] = { .scancode = Scancode::PgDn, .shift = false },
+  [(int)Keymap::Key::SR2] = { .scancode = Scancode::PgUp, .shift = false },
   [(int)Keymap::Key::SR3] = { .scancode = Scancode::Enter, .shift = false },
   [(int)Keymap::Key::SR4] = { .scancode = Scancode::Space, .shift = false }
 };
