@@ -19,11 +19,11 @@ class Keymap {
 
       F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 
-      PrintScr, ScrollLock, Pause, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
+      PrintScrn, ScrollLock, Pause, Insert, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-      Capslock, Insert, SL1, SL3, SL4, SR1, SR3, SR4,
+      Capslock, SL1, SL2, SL3, SL4, SR1, SR2, SR3, SR4,
       
-      LShift, RShift, SL2, SL5, SL6, SR2, SR5, SR6, PG,
+      LShift, RShift, SL5, SL6, SR5, SR6, PG, KY,
 
       Ctrl, Shift, Alt, 
       
