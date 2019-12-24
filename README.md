@@ -1,7 +1,8 @@
 This repo is a personal fork of [This fantastic work to make a Bluetooth LE version of the Kinesis Advantage](https://github.com/sysdevmike/KinesisBLE). This will track the above as closely as possible. Main changes include:
 
 - Restoring the default Kinesis layout in the master branch. Checkout my personal branch for my own take on the layout.
-- TODO: Restore bluetooth connection reset keymap
+- Restore bluetooth connection reset keymap
+    - Added disconnect key mapped to Keymap. It's not exactly needed that you clear the bonds. You can just turn the keyboard on and off and disconnect and it should be discoverable to a new machine. I will eventually implement a version where it clears all bonds with a key combo.
 - TODO: Restore program key for power off keymap.
 
 # Wireless Kinesis Advantage BLE (Bluetooth Low Energy)
