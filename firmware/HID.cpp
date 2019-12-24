@@ -210,7 +210,9 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::SR1] = { .scancode = Scancode::PgDn, .shift = false },
   [(int)Keymap::Key::SR2] = { .scancode = Scancode::PgUp, .shift = false },
   [(int)Keymap::Key::SR3] = { .scancode = Scancode::Enter, .shift = false },
-  [(int)Keymap::Key::SR4] = { .scancode = Scancode::Space, .shift = false }
+  [(int)Keymap::Key::SR4] = { .scancode = Scancode::Space, .shift = false },
+
+  [(int)Keymap::Key::KY] = { .scancode = Scancode::None, .shift = false }
 };
 
 HID::HID(void)
@@ -277,7 +279,27 @@ void HID::sendKeys(
         report.modifier |= modifers[(int)HID::Mod::RCtrl]; break;
       case Keymap::Key::SR6:
         report.modifier |= modifers[(int)HID::Mod::RCmd]; break;              
-      
+      case Keymap::Key::KY: //Make KY disconnect bluetooth.
+        #ifdef DEBUG
+          Serial.begin(115200);
+          while ( !Serial ) delay(10);   // for nrf52840 with native USB
+  
+          Serial.println("----- Before -----\n");
+          bond_print_list(BLE_GAP_ROLE_PERIPH);
+          bond_print_list(BLE_GAP_ROLE_CENTRAL);
+        #endif
+        
+          Bluefruit.disconnect();
+        
+        #ifdef DEBUG
+          Serial.println();
+          Serial.println("----- After  -----\n");
+          
+          bond_print_list(BLE_GAP_ROLE_PERIPH);
+          bond_print_list(BLE_GAP_ROLE_CENTRAL);
+        #endif
+        break;
+        
       default: {
         auto info = scancodeMap[(int)key];
        

@@ -3,8 +3,8 @@
 Keyboard::Keyboard(void)
 : matrix(), keymap(), hid(), power(), restTimer() {
   idleTime = 0;
-  int batterLEDOnMinutes = 3;
-  batteryLEDOnDuration = batterLEDOnMinutes * 60 * 1000;
+  int batteryLEDOnSeconds = 10;
+  batteryLEDOnDuration = batteryLEDOnSeconds * 1000;
 }
 
 void Keyboard::begin(void) {

@@ -35,6 +35,7 @@ void LED::setAllLEDs(bool state) {
   setLED(NUM_PIN, state);
   setLED(SCR_PIN, state);
   setLED(KEY_PIN, state);
+  powerButtonOff();
 }
 
 void LED::setLED(int pin, bool state) {
