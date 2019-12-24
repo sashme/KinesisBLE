@@ -84,7 +84,9 @@ const uint8_t HID::scancodes[] = {
   [(int)Scancode::Left] = 0x50,
   [(int)Scancode::Down] = 0x51,
   [(int)Scancode::Up] = 0x52,
-  [(int)Scancode::Capslock] = 0x39
+  [(int)Scancode::Capslock] = 0x39,
+  [(int)Scancode::VolUp] = 0x80,
+  [(int)Scancode::VolDn] = 0x81
   //[(int)Scancode::Hyper] = 0x6D //this is f18.
 };
 
@@ -186,8 +188,8 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::F8] = { .scancode = Scancode::F8, .shift = false },
   [(int)Keymap::Key::F9] = { .scancode = Scancode::F9, .shift = false },
   [(int)Keymap::Key::F10] = { .scancode = Scancode::F10, .shift = false },
-  [(int)Keymap::Key::F11] = { .scancode = Scancode::F11, .shift = false },
-  [(int)Keymap::Key::F12] = { .scancode = Scancode::F12, .shift = false },
+  [(int)Keymap::Key::F11] = { .scancode = Scancode::VolDn, .shift = false },
+  [(int)Keymap::Key::F12] = { .scancode = Scancode::VolUp, .shift = false },
   [(int)Keymap::Key::PrintScrn] = { .scancode = Scancode::PrintScrn, .shift = false },
   [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::ScrollLock, .shift = false },
   [(int)Keymap::Key::Pause] = { .scancode = Scancode::Pause, .shift = false },
@@ -210,7 +212,9 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::SR1] = { .scancode = Scancode::PgDn, .shift = false },
   [(int)Keymap::Key::SR2] = { .scancode = Scancode::PgUp, .shift = false },
   [(int)Keymap::Key::SR3] = { .scancode = Scancode::Enter, .shift = false },
-  [(int)Keymap::Key::SR4] = { .scancode = Scancode::Space, .shift = false }
+  [(int)Keymap::Key::SR4] = { .scancode = Scancode::Space, .shift = false },
+
+  [(int)Keymap::Key::KY] = { .scancode = Scancode::None, .shift = false }
 };
 
 HID::HID(void)
@@ -284,7 +288,32 @@ void HID::sendKeys(
       case Keymap::Key::SL3: //remap originally delete key to left shift.
         report.modifier |= modifers[(int)HID::Mod::LShift]; break;
       case Keymap::Key::Minus: //remap originally minus key to right shift
-        report.modifier |= modifers[(int)HID::Mod::RShift]; break;                          
+        report.modifier |= modifers[(int)HID::Mod::RShift]; break;
+      case Keymap::Key::KY: //Make KY disconnect bluetooth.
+
+        #ifdef DEBUG
+          Serial.begin(115200);
+          while ( !Serial ) delay(10);   // for nrf52840 with native usb
+  
+          Serial.println("Bluefruit52 Clear Bonds Example");
+          Serial.println("-------------------------------\n");
+  
+          Serial.println();
+          Serial.println("----- Before -----\n");
+          bond_print_list(BLE_GAP_ROLE_PERIPH);
+          bond_print_list(BLE_GAP_ROLE_CENTRAL);
+        #endif
+        
+          Bluefruit.disconnect();
+        
+        #ifdef DEBUG
+          Serial.println();
+          Serial.println("----- After  -----\n");
+          
+          bond_print_list(BLE_GAP_ROLE_PERIPH);
+          bond_print_list(BLE_GAP_ROLE_CENTRAL);
+        #endif
+        break;                                  
       
       default: {
         auto info = scancodeMap[(int)key];
@@ -297,7 +326,7 @@ void HID::sendKeys(
     }
   }
 
-  if (memcmp(&report, &oldReport, sizeof(report))) {       
+  if (memcmp(&report, &oldReport, sizeof(report))) {    
     bleHID.keyboardReport(&report);
   }
 }
