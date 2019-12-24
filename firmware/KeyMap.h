@@ -21,15 +21,9 @@ class Keymap {
 
       PrintScrn, ScrollLock, Pause, Insert, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-<<<<<<< HEAD
       Capslock, SL1, SL2, SL3, SL4, SR1, SR2, SR3, SR4,
       
       LShift, RShift, SL5, SL6, SR5, SR6, PG, KY,
-=======
-      Capslock, SL1, SL2, SL4, SR1, SR2, SR3, SR4, KY,
-      
-      LShift, RShift, SL3, SL5, SL6, SR5, SR6, PG, 
->>>>>>> e35410f... Reduce LED power time. Add disconnect button (Keypad)
 
       Ctrl, Shift, Alt, 
       
