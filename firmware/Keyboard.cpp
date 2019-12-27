@@ -24,7 +24,7 @@ void Keyboard::update(void) {
   }
 
   led.process();
-  restCheck();
+  //restCheck(); //Turned off pomodoro timings.
   sleepCheck();
 }
 
