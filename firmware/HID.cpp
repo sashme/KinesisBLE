@@ -1,6 +1,7 @@
 #include "HID.h"
 
 #include <Arduino.h>
+#include "Adafruit_TinyUSB.h"
 
 const uint8_t HID::scancodes[] = {
   [(int)Scancode::A] = 0x4,
@@ -190,8 +191,8 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::F10] = { .scancode = Scancode::F10, .shift = false },
   [(int)Keymap::Key::F11] = { .scancode = Scancode::VolDn, .shift = false },
   [(int)Keymap::Key::F12] = { .scancode = Scancode::VolUp, .shift = false },
-  [(int)Keymap::Key::PrintScrn] = { .scancode = Scancode::PrintScrn, .shift = false },
-  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::ScrollLock, .shift = false },
+  [(int)Keymap::Key::PrintScrn] = { .scancode = Scancode::PrintScrn, .shift = false },    
+  [(int)Keymap::Key::ScrollLock] = { .scancode = Scancode::ScrollLock, .shift = false },     
   [(int)Keymap::Key::Pause] = { .scancode = Scancode::Pause, .shift = false },
   [(int)Keymap::Key::Insert] = { .scancode = Scancode::Insert, .shift = false },
   [(int)Keymap::Key::Home] = { .scancode = Scancode::Home, .shift = false },
@@ -203,7 +204,7 @@ const HID::KeyInfo HID::scancodeMap[] = {
   [(int)Keymap::Key::Left] = { .scancode = Scancode::Left, .shift = false },
   [(int)Keymap::Key::Down] = { .scancode = Scancode::Down, .shift = false },
   [(int)Keymap::Key::Up] = { .scancode = Scancode::Up, .shift = false },
-
+  
   [(int)Keymap::Key::Capslock] = { .scancode = Scancode::Esc, .shift = false },
   [(int)Keymap::Key::SL1] = { .scancode = Scancode::End, .shift = false },
   [(int)Keymap::Key::SL2] = { .scancode = Scancode::Home, .shift = false },
@@ -222,14 +223,21 @@ HID::HID(void)
   memset(&report, 0, sizeof(report));
 }
 
+uint8_t const desc_hid_report[] =
+{
+  TUD_HID_REPORT_DESC_KEYBOARD(),
+};
+
+Adafruit_USBD_HID usb_hid;
+
 void HID::begin(void) {
   Bluefruit.begin();
-  Bluefruit.setName("Kinesis Advantage 2");
+  Bluefruit.setName("Kinesis BLEx");
   Bluefruit.setTxPower(0);
   Bluefruit.autoConnLed(false);
 
-  bleDIS.setManufacturer("TODO");
-  bleDIS.setModel("TODO");
+  bleDIS.setManufacturer("Bluetooth");
+  bleDIS.setModel("Bluetooth");
   
   bleDIS.begin();
   bleHID.begin();
@@ -246,6 +254,12 @@ void HID::begin(void) {
   Bluefruit.Advertising.setInterval(32, 244);
   Bluefruit.Advertising.setFastTimeout(30);
   Bluefruit.Advertising.start(0);
+
+  usb_hid.setPollInterval(2);
+  usb_hid.setReportDescriptor(desc_hid_report, sizeof(desc_hid_report));
+  usb_hid.begin(); 
+  USBDevice.setProductDescriptor("Kinesis BLEx");
+  USBDevice.setManufacturerDescriptor("USB");
 }
 
 void HID::sendKeys(
@@ -254,7 +268,7 @@ void HID::sendKeys(
   auto oldReport = report;
   memset(&report, 0, sizeof(report));
 
-  for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 7; k++) { //what does i <7 refer to? says that row in matrix should be less than 7
+  for (int k = 0, i = 0; k < (int)Keymap::Key::Count && i < 7; k++) {
     auto key = (Keymap::Key)k;
     
     auto pressed = km->pressed(key);
@@ -273,10 +287,13 @@ void HID::sendKeys(
         report.keycode[i++] = scancodes[(int)HID::Scancode::Del]; break; //this is how you remap a modifier to a normal key.
       //case Keymap::Key::LShift:
       //  report.modifier |= modifers[(int)HID::Mod::LShift]; break;
+      
+      
       case Keymap::Key::RShift:
         report.keycode[i++] = scancodes[(int)HID::Scancode::Minus]; break; //this is how you remap a modifier to a normal key.
       //case Keymap::Key::RShift:
       //  report.modifier |= modifers[(int)HID::Mod::RShift]; break;
+      
       case Keymap::Key::SL5:
         report.modifier |= modifers[(int)HID::Mod::LAlt]; break;
       case Keymap::Key::SL6:
@@ -288,23 +305,20 @@ void HID::sendKeys(
       case Keymap::Key::SL3: //remap originally delete key to left shift.
         report.modifier |= modifers[(int)HID::Mod::LShift]; break;
       case Keymap::Key::Minus: //remap originally minus key to right shift
-        report.modifier |= modifers[(int)HID::Mod::RShift]; break;
+        report.modifier |= modifers[(int)HID::Mod::RShift]; break;                      
       case Keymap::Key::KY: //Make KY disconnect bluetooth.
-
+        
         #ifdef DEBUG
           Serial.begin(115200);
-          while ( !Serial ) delay(10);   // for nrf52840 with native usb
+          while ( !Serial ) delay(10);   // for nrf52840 with native USB
+          
   
-          Serial.println("Bluefruit52 Clear Bonds Example");
-          Serial.println("-------------------------------\n");
-  
-          Serial.println();
           Serial.println("----- Before -----\n");
           bond_print_list(BLE_GAP_ROLE_PERIPH);
           bond_print_list(BLE_GAP_ROLE_CENTRAL);
         #endif
         
-          Bluefruit.disconnect();
+        Bluefruit.disconnect(Bluefruit.connHandle());
         
         #ifdef DEBUG
           Serial.println();
@@ -313,8 +327,8 @@ void HID::sendKeys(
           bond_print_list(BLE_GAP_ROLE_PERIPH);
           bond_print_list(BLE_GAP_ROLE_CENTRAL);
         #endif
-        break;                                  
-      
+        break;
+
       default: {
         auto info = scancodeMap[(int)key];
        
@@ -326,7 +340,19 @@ void HID::sendKeys(
     }
   }
 
-  if (memcmp(&report, &oldReport, sizeof(report))) {    
-    bleHID.keyboardReport(&report);
+  bool setReport = memcmp(&report, &oldReport, sizeof(report));
+  if(!setReport) {
+    return;
   }
+  
+  if(usb_hid.ready()) {
+    usb_hid.sendReport(0, &report, sizeof(report));
+    return;
+  }
+  
+  bleHID.keyboardReport(&report);      
+}
+
+bool HID::isUSB(void) {
+  return usb_hid.ready();
 }

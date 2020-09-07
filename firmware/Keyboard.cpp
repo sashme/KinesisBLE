@@ -1,10 +1,11 @@
 #include "Keyboard.h"
+#include "config.h"
 
 Keyboard::Keyboard(void)
 : matrix(), keymap(), hid(), power(), restTimer() {
   idleTime = 0;
-  int batteryLEDOnSeconds = 10;
-  batteryLEDOnDuration = batteryLEDOnSeconds * 1000;
+  int batterLEDOnMinutes = 3;
+  batteryLEDOnDuration = batterLEDOnMinutes * 60 * 1000;
 }
 
 void Keyboard::begin(void) {
@@ -24,7 +25,12 @@ void Keyboard::update(void) {
   }
 
   led.process();
-  //restCheck(); //Turned off pomodoro timings.
+
+  #if REST_TIMER
+    restCheck();
+  #endif
+  
+  
   sleepCheck();
 }
 
@@ -44,6 +50,11 @@ void Keyboard::indicateBatteryLevel(void) {
 }
 
 void Keyboard::sleepCheck(void) {
+
+  if(hid.isUSB()) {
+    return;
+  }
+  
   if ((millis() - idleTime) > (sleepMinutes * 60 * 1000)) {
     led.offAll();
     matrix.sleep();    
