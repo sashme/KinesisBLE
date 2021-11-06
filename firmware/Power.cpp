@@ -1,6 +1,6 @@
 
 #include "Power.h"
-#include "Led.h"
+#include "LED.h"
 
 Power::Power( void )
 {
@@ -99,4 +99,3 @@ int Power::usbAverageVoltage( void )
 
   return totalUsbMv / numUsbReadingsForAverage;
 }
-

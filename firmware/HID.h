@@ -11,6 +11,7 @@ public:
   HID( void );
   void begin( void );
   void sendKeys( const Keymap* km );
+  bool isUSB( void ) const;
 
 private:
   // clang-format off

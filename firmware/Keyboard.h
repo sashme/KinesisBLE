@@ -11,10 +11,10 @@
 class Keyboard
 {
 public:
-  Keyboard(void);
-  void begin(void);
-  void update(void);
-  void sleepCheck(void);
+  Keyboard( void );
+  void begin( void );
+  void update( void );
+  void sleepCheck( void );
 
 private:
   Matrix matrix;
@@ -23,7 +23,7 @@ private:
   LED led;
   Power power;
   unsigned long idleTime;
-  void indicateBatteryLevel(void);
+  void indicateBatteryLevel( void );
   unsigned long batteryLEDOnDuration;
 
   static const uint8_t sleepMinutes = 10;

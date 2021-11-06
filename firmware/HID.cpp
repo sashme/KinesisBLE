@@ -1,6 +1,7 @@
 
 #include "HID.h"
 
+#include "Adafruit_TinyUSB.h"
 #include <Arduino.h>
 
 // clang-format off
@@ -91,7 +92,10 @@ const uint8_t HID::scancodes[] =
   //[(int)Scancode::Hyper] = 0x6D //this is f18.
 };
 
-const uint8_t HID::modifers[] = { [(int) Mod::Ctrl] = 1 << 0,
+// clang-format off
+const uint8_t HID::modifers[] =
+{
+  [(int) Mod::Ctrl] = 1 << 0,
   [(int) Mod::Alt] = 1 << 2,
   [(int) Mod::Shift] = 1 << 1,
 
@@ -102,9 +106,12 @@ const uint8_t HID::modifers[] = { [(int) Mod::Ctrl] = 1 << 0,
   [(int) Mod::RCtrl] = 1 << 4,
   [(int) Mod::RShift] = 1 << 5,
   [(int) Mod::RAlt] = 1 << 6,
-  [(int) Mod::RCmd] = 1 << 7 };
+  [(int) Mod::RCmd] = 1 << 7
+};
 
-const HID::KeyInfo HID::scancodeMap[] = { [(int) Keymap::Key::A] = { .scancode = Scancode::A, .shift = false },
+const HID::KeyInfo HID::scancodeMap[] =
+{
+  [(int) Keymap::Key::A] = { .scancode = Scancode::A, .shift = false },
   [(int) Keymap::Key::B] = { .scancode = Scancode::B, .shift = false },
   [(int) Keymap::Key::C] = { .scancode = Scancode::C, .shift = false },
   [(int) Keymap::Key::D] = { .scancode = Scancode::D, .shift = false },
@@ -216,6 +223,12 @@ const HID::KeyInfo HID::scancodeMap[] = { [(int) Keymap::Key::A] = { .scancode =
 };
 // clang-format on
 
+uint8_t const desc_hid_report[] = {
+  TUD_HID_REPORT_DESC_KEYBOARD(),
+};
+
+Adafruit_USBD_HID usb_hid;
+
 HID::HID( void )
     : bleDIS()
     , bleHID()
@@ -226,12 +239,12 @@ HID::HID( void )
 void HID::begin( void )
 {
   Bluefruit.begin();
-  Bluefruit.setName( "Kinesis Advantage 2" );
+  Bluefruit.setName( "Kinesis Advantage BLEx" );
   Bluefruit.setTxPower( 0 );
   Bluefruit.autoConnLed( false );
 
-  bleDIS.setManufacturer( "TODO" );
-  bleDIS.setModel( "TODO" );
+  bleDIS.setManufacturer( "Kinesis" );
+  bleDIS.setModel( "Advantage BLEx" );
 
   bleDIS.begin();
   bleHID.begin();
@@ -248,6 +261,12 @@ void HID::begin( void )
   Bluefruit.Advertising.setInterval( 32, 244 );
   Bluefruit.Advertising.setFastTimeout( 30 );
   Bluefruit.Advertising.start( 0 );
+
+  usb_hid.setPollInterval( 2 );
+  usb_hid.setReportDescriptor( desc_hid_report, sizeof( desc_hid_report ) );
+  usb_hid.begin();
+  USBDevice.setProductDescriptor( "Kinesis BLEx" );
+  USBDevice.setManufacturerDescriptor( "USB" );
 }
 
 void HID::sendKeys( const Keymap* km )
@@ -261,7 +280,9 @@ void HID::sendKeys( const Keymap* km )
 
     auto pressed = km->pressed( key );
     if( ! pressed )
+    {
       continue;
+    }
 
     switch( key )
     {
@@ -295,6 +316,7 @@ void HID::sendKeys( const Keymap* km )
       case Keymap::Key::SR6:
         report.modifier |= modifers[ ( int ) HID::Mod::RCmd ];
         break;
+        /*
       case Keymap::Key::KY: //Make KY disconnect bluetooth.
 #ifdef DEBUG
         Serial.begin( 115200 );
@@ -316,6 +338,7 @@ void HID::sendKeys( const Keymap* km )
         bond_print_list( BLE_GAP_ROLE_CENTRAL );
 #endif
         break;
+        */
 
       default:
       {
@@ -330,8 +353,22 @@ void HID::sendKeys( const Keymap* km )
     }
   }
 
-  if( memcmp( &report, &oldReport, sizeof( report ) ) )
+  bool setReport = memcmp( &report, &oldReport, sizeof( report ) );
+  if( not setReport )
   {
-    bleHID.keyboardReport( &report );
+    return;
   }
+
+  if( usb_hid.ready() )
+  {
+    usb_hid.sendReport( 0, &report, sizeof( report ) );
+    return;
+  }
+
+  bleHID.keyboardReport( &report );
+}
+
+bool HID::isUSB( void ) const
+{
+  return usb_hid.ready();
 }

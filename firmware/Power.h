@@ -6,7 +6,6 @@
 
 class Power
 {
-
 public:
   Power( void );
   uint8_t batteryRemainingPercentage( void );
