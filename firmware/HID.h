@@ -5,53 +5,66 @@
 
 #include "KeyMap.h"
 
-class HID {
-  public:
-    HID(void);
-    void begin(void);
-    void sendKeys(const Keymap *km);
-  private:
+class HID
+{
+public:
+  HID( void );
+  void begin( void );
+  void sendKeys( const Keymap* km );
 
-    enum class Scancode : uint8_t {
-      A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+private:
+  // clang-format off
+  enum class Scancode : uint8_t
+  {
+    A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
 
-      Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num0,
+    Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num0,
 
-      Enter, Esc, BSpace, Tab, Space, Minus, Equal, LBrace, RBrace, BSlash,
-      Tilde, Semicolon, SQuote, Grave, Comma, Period, Slash,
+    Enter, Esc, BSpace, Tab, Space, Minus, Equal, LBrace, RBrace, BSlash,
+    Tilde, Semicolon, SQuote, Grave, Comma, Period, Slash,
 
-      F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+    F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 
-      PrintScrn, ScrollLock, Pause, Insert,
+    PrintScrn, ScrollLock, Pause, Insert,
 
-      Home, PgUp, Del, End, PgDn, Right, Left, Down, Up, 
-      
-      Capslock, Hyper,
-      
-      Count,
-      None
-    };
+    Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-    enum class Mod {
-      Ctrl, Alt, Shift,
-      LCtrl, LShift, LAlt, LCmd,
-      RCtrl, RShift, RAlt, RCmd
-    };
+    Capslock, Hyper,
 
-    struct KeyInfo {
-      Scancode scancode : 7;
-      bool shift : 1;
-    };
+    Count,
+    None
+  };
+  // clang-format on
 
-    BLEHidAdafruit bleHID;
-    BLEDis bleDIS;
-    hid_keyboard_report_t report;
+  enum class Mod
+  {
+    Ctrl,
+    Alt,
+    Shift,
+    LCtrl,
+    LShift,
+    LAlt,
+    LCmd,
+    RCtrl,
+    RShift,
+    RAlt,
+    RCmd
+  };
 
-    static const uint8_t scancodes[];
-    static const uint8_t modifers[];
-    static const KeyInfo scancodeMap[];
-    static const uint8_t modMap[];
-    
+  struct KeyInfo
+  {
+    Scancode scancode : 7;
+    bool shift : 1;
+  };
+
+  BLEHidAdafruit bleHID;
+  BLEDis bleDIS;
+  hid_keyboard_report_t report;
+
+  static const uint8_t scancodes[];
+  static const uint8_t modifers[];
+  static const KeyInfo scancodeMap[];
+  static const uint8_t modMap[];
 };
 
 #endif
