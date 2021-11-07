@@ -16,6 +16,7 @@ LED::LED( void )
 
 void LED::begin( void )
 {
+  setAllLEDs( LOW );
   powerButtonOn();
 }
 
@@ -47,7 +48,8 @@ void LED::setLED( int pin, bool state )
 {
   if( state == HIGH )
   {
-    analogWrite( pin, 10 );
+    //analogWrite( pin, 10 );
+    analogWrite( pin, 2 );
   }
   else
   {
@@ -159,4 +161,3 @@ void LED::stopFlashing( void )
     LEDsOff();
   }
 }
-

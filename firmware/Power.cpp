@@ -1,6 +1,5 @@
 
 #include "Power.h"
-#include "LED.h"
 
 Power::Power( void )
 {
@@ -20,24 +19,34 @@ int Power::VBATReading( void )
   delay( 1 );
 
   // Get the raw 12-bit, 0..3000mV ADC value
-  raw = analogRead( VBAT_PIN );
+  raw = analogRead( PIN_VBAT );
 
   // Set the ADC back to the default settings
   analogReference( AR_DEFAULT );
   analogReadResolution( 10 );
 
-  return raw;
+  return raw * MV_PER_LSB * VBAT_DIVIDER_COMP;
 }
 
 uint8_t Power::percentageFrom( float mvolts )
 {
-  uint8_t battery_level;
+  // fully charged LiPo voltage is 4.2v (for 3.7v rated item)
+  float const BASEV = 4200.;
+  // base approximation value is 3000
+  float const BASE = 3000.;
+  // scale factor
+  float const SCALE = BASE / BASEV;
 
-  if( mvolts >= 3000 )
+  // scale intput down
+  mvolts = mvolts * SCALE;
+
+  if( mvolts >= BASE )
   {
-    battery_level = 100;
+    mvolts = BASE;
   }
-  else if( mvolts > 2900 )
+
+  int battery_level = 0;
+  if( mvolts > 2900 )
   {
     battery_level = 100 - ( ( 3000 - mvolts ) * 58 ) / 100;
   }
@@ -53,10 +62,6 @@ uint8_t Power::percentageFrom( float mvolts )
   {
     battery_level = 6 - ( ( 2440 - mvolts ) * 6 ) / 340;
   }
-  else
-  {
-    battery_level = 0;
-  }
 
   return battery_level;
 }
@@ -64,9 +69,10 @@ uint8_t Power::percentageFrom( float mvolts )
 uint8_t Power::batteryRemainingPercentage( void )
 {
   int vbat_raw = VBATReading();
-  return percentageFrom( vbat_raw * MV_PER_LSB );
+  return percentageFrom( vbat_raw );
 }
 
+/*
 int Power::usbRawVoltage( void )
 {
   analogReference( AR_INTERNAL_3_0 );
@@ -99,3 +105,4 @@ int Power::usbAverageVoltage( void )
 
   return totalUsbMv / numUsbReadingsForAverage;
 }
+*/

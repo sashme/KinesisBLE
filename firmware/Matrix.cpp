@@ -102,8 +102,6 @@ bool Matrix::scan( void )
       }
     }
 
-    Serial.println( scanTime );
-    Serial.println( c );
     mcp.digitalWrite( colPins[ c ], HIGH );
   }
 
@@ -129,4 +127,3 @@ void Matrix::sleep( void )
     nrf_gpio_cfg_sense_input( g_ADigitalPinMap[ rowPins[ r ] ], NRF_GPIO_PIN_PULLUP, NRF_GPIO_PIN_SENSE_LOW );
   }
 }
-

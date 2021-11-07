@@ -15,6 +15,7 @@ public:
   void begin( void );
   void update( void );
   void sleepCheck( void );
+  void batteryIndicationCheck( void );
 
 private:
   Matrix matrix;
@@ -27,7 +28,9 @@ private:
   unsigned long batteryLEDOnDuration;
 
   static const uint8_t sleepMinutes = 10;
+  static const unsigned long batteryIndicationFrequencyHours = 1;
+  unsigned long batteryIndicationPause;
+  unsigned long lastBatteryIndicationTime;
 };
 
 #endif
-

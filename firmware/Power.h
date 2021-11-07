@@ -12,10 +12,15 @@ public:
 
 private:
   const float MV_PER_LSB = 0.73242188F;
-  const float VBAT_DIVIDER = 0.71275837F;
-  const float VBAT_DIVIDER_COMP = 1.403F;
-  const uint8_t VBAT_PIN = A7;
-  const uint8_t USB_PIN = A6;
+  const float VBAT_DIVIDER = 0.5F;
+  const float VBAT_DIVIDER_COMP = 2.0F;
+
+  int VBATReading( void );
+  uint8_t percentageFrom( float mvolts );
+
+  /*
+  //const uint8_t VBAT_PIN = A6;
+  const uint8_t USB_PIN = A7;
 
   static const int numUsbReadingsForAverage = 30;
   int usbReadings[ numUsbReadingsForAverage ];
@@ -28,12 +33,11 @@ private:
   uint32_t batteryLedTimer = 0;
   bool batteryLedOn = false;
 
-  int VBATReading( void );
-  uint8_t percentageFrom( float mvolts );
   int batteryMv( void );
   bool usbConnected( void );
   int usbRawVoltage( void );
   int usbAverageVoltage( void );
+  */
 };
 
 #endif
