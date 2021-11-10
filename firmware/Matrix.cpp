@@ -34,11 +34,11 @@ void Matrix::begin( void )
 bool Matrix::updateState( const int row, const int col, const bool pressed )
 {
 
-  KeyState* state = &( keys[ row ][ col ] );
+  KeyState& state = keys[ row ][ col ];
   auto scanTime = millis();
-  bool bouncing = ( scanTime - state->pressTime ) < debounceTime;
+  bool bouncing = ( scanTime - state.pressTime ) < debounceTime;
 
-  switch( state->status )
+  switch( state.status )
   {
     case KeyStatus::NOT_PRESSED:
       if( ! pressed )
@@ -46,8 +46,8 @@ bool Matrix::updateState( const int row, const int col, const bool pressed )
         return false;
       }
       // state transition from not pressed to pressed
-      state->status = KeyStatus::PRESSED_BOUNCING;
-      state->pressTime = scanTime;
+      state.status = KeyStatus::PRESSED_BOUNCING;
+      state.pressTime = scanTime;
       return true;
 
     case KeyStatus::PRESSED_BOUNCING:
@@ -55,7 +55,7 @@ bool Matrix::updateState( const int row, const int col, const bool pressed )
       {
         return false;
       }
-      state->status = KeyStatus::PRESSED;
+      state.status = KeyStatus::PRESSED;
       return false;
 
     case KeyStatus::PRESSED:
@@ -64,8 +64,8 @@ bool Matrix::updateState( const int row, const int col, const bool pressed )
         return false;
       }
       // state transition from pressed to not pressed
-      state->status = KeyStatus::RELEASING_BOUNCING;
-      state->pressTime = scanTime;
+      state.status = KeyStatus::RELEASING_BOUNCING;
+      state.pressTime = scanTime;
       return true;
 
     case KeyStatus::RELEASING_BOUNCING:
@@ -73,7 +73,7 @@ bool Matrix::updateState( const int row, const int col, const bool pressed )
       {
         return false;
       }
-      state->status = KeyStatus::NOT_PRESSED;
+      state.status = KeyStatus::NOT_PRESSED;
       return false;
   }
 

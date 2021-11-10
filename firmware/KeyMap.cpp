@@ -6,24 +6,28 @@
 // alternations:
 // Key::Up <> Key::Down
 const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col] = {
-  [(int)Layer::Base] = {
-    { Key::Equal,    Key::Num1,  Key::Num2,   Key::Num3, Key::Num4, Key::Num5,  Key::Num6, Key::Num7, Key::Num8,  Key::Num9,   Key::Num0,      Key::Minus,  Key::Esc,   Key::F1,        Key::F2  },
-    { Key::Tab,      Key::Q,     Key::W,      Key::E,    Key::R,    Key::T,     Key::Y,    Key::U,    Key::I,     Key::O,      Key::P,         Key::BSlash, Key::F3,    Key::F4,        Key::F5 },
-    { Key::Capslock, Key::A,     Key::S,      Key::D,    Key::F,    Key::G,     Key::H,    Key::J,    Key::K,     Key::L,      Key::Semicolon, Key::SQuote, Key::F6,    Key::F7,        Key::F8 },
-    { Key::LShift,   Key::Z,     Key::X,      Key::C,    Key::V,    Key::B,     Key::N,    Key::M,    Key::Comma, Key::Period, Key::Slash,     Key::RShift, Key::F9,    Key::F10,       Key::F11 },
-    { Key::None,     Key::Grave, Key::Insert, Key::Left, Key::None, Key::Right, Key::Down, Key::None, Key::Up,    Key::LBrace, Key::RBrace,    Key::None,   Key::F12,   Key::PrintScrn, Key::ScrollLock },
-    { Key::None,     Key::None,  Key::SL1,    Key::SL2,  Key::None, Key::SL5,   Key::SR4,  Key::SR3,  Key::SR6,   Key::None,   Key::None,      Key::None,   Key::Pause, Key::PG,        Key::KY },
-    { Key::None,     Key::None,  Key::None,   Key::SL4,  Key::SL3,  Key::SL6,   Key::SR1,  Key::None, Key::SR2,   Key::SR5,    Key::None,      Key::None,   Key::None,  Key::None,      Key::None }
-  },
-  [(int)Layer::Sym] = {
-    { Key::None, Key::F9,      Key::F7,     Key::F5,        Key::F3,       Key::F1,     Key::F10,    Key::F2,         Key::F4,       Key::F6,     Key::F8,   Key::None },
-    { Key::None, Key::Percent, Key::At,     Key::BSlash,    Key::LBrace,   Key::LBrack, Key::RBrack, Key::RBrace,     Key::None,     Key::Carrot, Key::None, Key::None },
-    { Key::None, Key::Pound,   Key::Dollar, Key::LParen,    Key::Asterisk, Key::Bang,   Key::Slash,  Key::Underscore, Key::RParen,   Key::Equal,  Key::Plus, Key::None },
-    { Key::None, Key::None,    Key::None,   Key::Ampersand, Key::Pipe,     Key::None,   Key::None,   Key::None,       Key::Question, Key::None,   Key::None, Key::None },
-    { Key::None, Key::None,    Key::None,   Key::None,      Key::None,     Key::None,   Key::None,   Key::None,       Key::None,     Key::None,   Key::None, Key::None },
-    { Key::None, Key::None,    Key::None,   Key::None,      Key::None,     Key::None,   Key::None,   Key::None,       Key::None,     Key::None,   Key::None, Key::None },
-    { Key::None, Key::None,    Key::None,   Key::None,      Key::None,     Key::None,   Key::None,   Key::None,       Key::None,     Key::None,   Key::None, Key::None }
-  }
+
+#define k(key) Key::key
+[(int)Layer::Base] = {
+{k(    Eq ),k(   Nm1 ),k(   Nm2 ),k(   Nm3 ),k(   Nm4 ),k(   Nm5 ),k(   Nm6 ),k(   Nm7 ),k(   Nm8 ),k(   Nm9 ),k(   Nm0 ),k( Minus ),k(   Esc ),k(    F1 ),k(    F2 )},
+{k(   Tab ),k(     Q ),k(     W ),k(     E ),k(     R ),k(     T ),k(     Y ),k(     U ),k(     I ),k(     O ),k(     P ),k(  Hash ),k(    F3 ),k(    F4 ),k(    F5 )},
+{k(  Caps ),k(     A ),k(     S ),k(     D ),k(     F ),k(     G ),k(     H ),k(     J ),k(     K ),k(     L ),k(SmColn ),k(SQuote ),k(    F6 ),k(    F7 ),k(    F8 )},
+{k(   LSh ),k(     Z ),k(     X ),k(     C ),k(     V ),k(     B ),k(     N ),k(     M ),k( Comma ),k(   Dot ),k( Slash ),k(   RSh ),k(    F9 ),k(   F10 ),k(   F11 )},
+{k(  ____ ),k( Grave ),k(BSlash ),k(  Left ),k(  ____ ),k( Right ),k(  Down ),k(  ____ ),k(    Up ),k(  LBrc ),k(  RBrc ),k(  ____ ),k(   F12 ),k( PrtSc ),k(ScrlLk )},
+{k(  ____ ),k(  ____ ),k(   SL1 ),k(   SL2 ),k(  ____ ),k(   SL5 ),k(   SR4 ),k(   SR3 ),k(   SR6 ),k(  ____ ),k(  ____ ),k(  ____ ),k( Pause ),k(    KY ),k(    PG )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(   SL4 ),k(   SL3 ),k(   SL6 ),k(   SR1 ),k(  ____ ),k(   SR2 ),k(   SR5 ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )}
+},
+
+[(int)Layer::Sym] = {
+{k(  ____ ),k(    F9 ),k(    F7 ),k(    F5 ),k(    F3 ),k(    F1 ),k(   F10 ),k(    F2 ),k(    F4 ),k(    F6 ),k(    F8 ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  Perc ),k(    At ),k(BSlash ),k(  LBrc ),k(LBrckt ),k(RBrckt ),k(  RBrc ),k(  ____ ),k( Caret ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  Hash ),k(Dollar ),k(LParen ),k(  Star ),k(  Bang ),k( Slash ),k( Under ),k(RParen ),k(    Eq ),k(  Plus ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(   Amp ),k(  Pipe ),k(  ____ ),k(  ____ ),k(  ____ ),k(Questn ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )}
+}
+#undef k
 };
 // clang-format on
 
@@ -47,7 +51,7 @@ Keymap::Key Keymap::resolveKey( const Matrix::Key k ) const
     case ModState::StickLight:
     case ModState::StickHeavy:
       auto key = layout[ ( int ) Layer::Sym ][ k.r ][ k.c ];
-      return key == Key::None ? layout[ ( int ) Layer::Base ][ k.r ][ k.c ] : key;
+      return key == Key::____ ? layout[ ( int ) Layer::Base ][ k.r ][ k.c ] : key;
   }
 }
 
@@ -110,7 +114,7 @@ void Keymap::update( const Matrix* matrix )
 
       switch( key )
       {
-        case Key::None:
+        case Key::____:
           break;
         case Key::Ctrl:
         case Key::Alt:

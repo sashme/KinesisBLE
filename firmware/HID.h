@@ -22,7 +22,7 @@ private:
     Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num0,
 
     Enter, Esc, BSpace, Tab, Space, Minus, Equal, LBrace, RBrace, BSlash,
-    Tilde, Semicolon, SQuote, Grave, Comma, Period, Slash,
+    Hash, Semicolon, SQuote, Grave, Comma, Dot, Slash,
 
     F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 
@@ -30,7 +30,7 @@ private:
 
     Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-    Capslock, Hyper,
+    Caps, KY, PG,
 
     Count,
     None
@@ -40,8 +40,8 @@ private:
   enum class Mod
   {
     Ctrl,
-    Alt,
     Shift,
+    Alt,
     LCtrl,
     LShift,
     LAlt,
@@ -54,8 +54,8 @@ private:
 
   struct KeyInfo
   {
-    Scancode scancode : 7;
     bool shift : 1;
+    Scancode scancode : 7;
   };
 
   BLEHidAdafruit bleHID;
@@ -65,7 +65,7 @@ private:
   static const uint8_t scancodes[];
   static const uint8_t modifers[];
   static const KeyInfo scancodeMap[];
-  static const uint8_t modMap[];
+  //static const uint8_t modMap[];
 };
 
 #endif

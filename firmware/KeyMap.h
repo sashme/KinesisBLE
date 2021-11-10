@@ -14,26 +14,29 @@ public:
   {
     A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
 
-    Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num0,
+    Nm1, Nm2, Nm3, Nm4, Nm5, Nm6, Nm7, Nm8, Nm9, Nm0,
 
-    Enter, Esc, BSpace, Tab, Space, Minus, Equal, LBrace, RBrace, BSlash, Tilde,
-    Semicolon, SQuote, Grave, Comma, Period, Slash, Percent, At, LBrack, RBrack,
-    Carrot, Pound, Dollar, LParen, RParen, Asterisk, Bang, Plus, Underscore,
-    Ampersand, Pipe, Question,
+    Enter, Esc, BSpace, Tab, Space,
+    Minus, Eq, LBrc, RBrc, SmColn,
+    SQuote, Comma, Dot, Slash, Grave,
+    
+    Tilde, At, LBrckt, RBrckt, RParen, Bang, 
+    DQuote, Hash, Dollar, Perc, Caret, Amp,
+    Star, LParen, Plus, Under, Pipe, Questn,
 
     F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 
-    PrintScrn, ScrollLock, Pause, Insert, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
+    PrtSc, ScrlLk, Pause, BSlash, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
-    Capslock, SL1, SL2, SL3, SL4, SR1, SR2, SR3, SR4, KY,
+    Caps, SL1, SL2, SL3, SL4, SR1, SR2, SR3, SR4, KY, PG,
 
-    LShift, RShift, SL5, SL6, SR5, SR6, PG,
+    LSh, RSh, SL5, SL6, SR5, SR6,
 
     Ctrl, Shift, Alt,
 
     Sym,
     Count,
-    None
+    ____
   };
   // clang-format on
 
@@ -78,4 +81,3 @@ private:
 };
 
 #endif
-

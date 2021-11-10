@@ -9,7 +9,7 @@ Keyboard::Keyboard( void )
     , power()
 {
   idleTime = 0;
-  int batteryLEDOnSeconds = 10;
+  int batteryLEDOnSeconds = 5;
   batteryLEDOnDuration = batteryLEDOnSeconds * 1000;
   batteryIndicationPause = batteryIndicationFrequencyHours * 3600 * 1000;
 }
@@ -24,14 +24,12 @@ void Keyboard::begin( void )
 
 void Keyboard::update( void )
 {
-
   auto update = matrix.scan();
   if( update )
   {
     idleTime = millis();
     keymap.update( &matrix );
     hid.sendKeys( &keymap );
-    indicateBatteryLevel();
   }
 
   led.process();
@@ -101,3 +99,4 @@ void Keyboard::sleepCheck( void )
     batteryIndicationCheck();
   }
 }
+
