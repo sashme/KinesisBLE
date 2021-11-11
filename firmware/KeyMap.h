@@ -18,15 +18,15 @@ public:
 
     Enter, Esc, BSpace, Tab, Space,
     Minus, Eq, LBrc, RBrc, SmColn,
-    SQuote, Comma, Dot, Slash, Grave,
+    SQuote, Comma, Dot, Slash, Grave, BSlash, Ins,
     
-    Tilde, At, LBrckt, RBrckt, RParen, Bang, 
-    DQuote, Hash, Dollar, Perc, Caret, Amp,
+    /*Tilde,*/ At, LBrckt, RBrckt, RParen, Bang, 
+    DQuote, /*Hash,*/ Dollar, Perc, Caret, Amp,
     Star, LParen, Plus, Under, Pipe, Questn,
 
     F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
 
-    PrtSc, ScrlLk, Pause, BSlash, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
+    PrtSc, ScrlLk, Pause, Home, PgUp, Del, End, PgDn, Right, Left, Down, Up,
 
     Caps, SL1, SL2, SL3, SL4, SR1, SR2, SR3, SR4, KY, PG,
 

@@ -10,23 +10,35 @@ const Keymap::Key Keymap::layout[][(int)Matrix::Dim::Row][(int)Matrix::Dim::Col]
 #define k(key) Key::key
 [(int)Layer::Base] = {
 {k(    Eq ),k(   Nm1 ),k(   Nm2 ),k(   Nm3 ),k(   Nm4 ),k(   Nm5 ),k(   Nm6 ),k(   Nm7 ),k(   Nm8 ),k(   Nm9 ),k(   Nm0 ),k( Minus ),k(   Esc ),k(    F1 ),k(    F2 )},
-{k(   Tab ),k(     Q ),k(     W ),k(     E ),k(     R ),k(     T ),k(     Y ),k(     U ),k(     I ),k(     O ),k(     P ),k(  Hash ),k(    F3 ),k(    F4 ),k(    F5 )},
+{k(   Tab ),k(     Q ),k(     W ),k(     E ),k(     R ),k(     T ),k(     Y ),k(     U ),k(     I ),k(     O ),k(     P ),k(BSlash ),k(    F3 ),k(    F4 ),k(    F5 )},
 {k(  Caps ),k(     A ),k(     S ),k(     D ),k(     F ),k(     G ),k(     H ),k(     J ),k(     K ),k(     L ),k(SmColn ),k(SQuote ),k(    F6 ),k(    F7 ),k(    F8 )},
 {k(   LSh ),k(     Z ),k(     X ),k(     C ),k(     V ),k(     B ),k(     N ),k(     M ),k( Comma ),k(   Dot ),k( Slash ),k(   RSh ),k(    F9 ),k(   F10 ),k(   F11 )},
-{k(  ____ ),k( Grave ),k(BSlash ),k(  Left ),k(  ____ ),k( Right ),k(  Down ),k(  ____ ),k(    Up ),k(  LBrc ),k(  RBrc ),k(  ____ ),k(   F12 ),k( PrtSc ),k(ScrlLk )},
+{k(  ____ ),k( Grave ),k(   Ins ),k(  Left ),k(  ____ ),k( Right ),k(  Down ),k(  ____ ),k(    Up ),k(  LBrc ),k(  RBrc ),k(  ____ ),k(   F12 ),k( PrtSc ),k(ScrlLk )},
 {k(  ____ ),k(  ____ ),k(   SL1 ),k(   SL2 ),k(  ____ ),k(   SL5 ),k(   SR4 ),k(   SR3 ),k(   SR6 ),k(  ____ ),k(  ____ ),k(  ____ ),k( Pause ),k(    KY ),k(    PG )},
 {k(  ____ ),k(  ____ ),k(  ____ ),k(   SL4 ),k(   SL3 ),k(   SL6 ),k(   SR1 ),k(  ____ ),k(   SR2 ),k(   SR5 ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )}
 },
 
+/*
 [(int)Layer::Sym] = {
 {k(  ____ ),k(    F9 ),k(    F7 ),k(    F5 ),k(    F3 ),k(    F1 ),k(   F10 ),k(    F2 ),k(    F4 ),k(    F6 ),k(    F8 ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
 {k(  ____ ),k(  Perc ),k(    At ),k(BSlash ),k(  LBrc ),k(LBrckt ),k(RBrckt ),k(  RBrc ),k(  ____ ),k( Caret ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
 {k(  ____ ),k(  Hash ),k(Dollar ),k(LParen ),k(  Star ),k(  Bang ),k( Slash ),k( Under ),k(RParen ),k(    Eq ),k(  Plus ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
 {k(  ____ ),k(  ____ ),k(  ____ ),k(   Amp ),k(  Pipe ),k(  ____ ),k(  ____ ),k(  ____ ),k(Questn ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
-{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  Pipe ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
 {k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
 {k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )}
 }
+*/
+[(int)Layer::Sym] = {
+{k(  ____ ),k(    F9 ),k(    F7 ),k(    F5 ),k(    F3 ),k(    F1 ),k(   F10 ),k(    F2 ),k(    F4 ),k(    F6 ),k(    F8 ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  Perc ),k(    At ),k(BSlash ),k(  LBrc ),k(LBrckt ),k(RBrckt ),k(  RBrc ),k(  ____ ),k( Caret ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(Dollar ),k(LParen ),k(  Star ),k(  Bang ),k( Slash ),k( Under ),k(RParen ),k(    Eq ),k(  Plus ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(   Amp ),k(  Pipe ),k(  ____ ),k(  ____ ),k(  ____ ),k(Questn ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  Pipe ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )},
+{k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ ),k(  ____ )}
+}
+
 #undef k
 };
 // clang-format on
