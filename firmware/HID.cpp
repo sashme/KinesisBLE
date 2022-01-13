@@ -314,7 +314,7 @@ void HID::sendKeys( const Keymap* km )
         break;
 
       case Keymap::Key::SL5:
-        report.modifier |= modifers[ ( int ) HID::Mod::LAlt ];
+        report.modifier |= modifers[ ( int ) HID::Mod::LCtrl ];
         break;
       case Keymap::Key::SL6:
         report.modifier |= modifers[ ( int ) HID::Mod::LCmd ];
@@ -326,7 +326,7 @@ void HID::sendKeys( const Keymap* km )
         report.modifier |= modifers[ ( int ) HID::Mod::RAlt ];
         break;
       case Keymap::Key::SR6:
-        report.modifier |= modifers[ ( int ) HID::Mod::RCmd ];
+        report.modifier |= modifers[ ( int ) HID::Mod::RCtrl ];
         break;
       case Keymap::Key::RSh:
         report.modifier |= modifers[ ( int ) HID::Mod::RShift ];
