@@ -3,10 +3,6 @@
 
 LED::LED( void )
 {
-  pinMode( CAPS_PIN, OUTPUT );
-  pinMode( NUM_PIN, OUTPUT );
-  pinMode( SCR_PIN, OUTPUT );
-  pinMode( KEY_PIN, OUTPUT );
   onTime = 0;
   isFlashing = false;
   lastFlashTime = 0;
@@ -16,6 +12,10 @@ LED::LED( void )
 
 void LED::begin( void )
 {
+  pinMode( CAPS_PIN, OUTPUT );
+  pinMode( NUM_PIN, OUTPUT );
+  pinMode( SCR_PIN, OUTPUT );
+  pinMode( KEY_PIN, OUTPUT );
   setAllLEDs( LOW );
   powerButtonOn();
 }

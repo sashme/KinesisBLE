@@ -316,20 +316,20 @@ void HID::sendKeys( const Keymap* km )
       case Keymap::Key::SL5:
         report.modifier |= modifers[ ( int ) HID::Mod::LAlt ];
         break;
-      case Keymap::Key::LSh:
-        report.modifier |= modifers[ ( int ) HID::Mod::LShift ];
-        break;
       case Keymap::Key::SL6:
         report.modifier |= modifers[ ( int ) HID::Mod::LCmd ];
         break;
-      case Keymap::Key::RSh:
-        report.modifier |= modifers[ ( int ) HID::Mod::RShift ];
+      case Keymap::Key::LSh:
+        report.modifier |= modifers[ ( int ) HID::Mod::LShift ];
         break;
       case Keymap::Key::SR5:
-        report.modifier |= modifers[ ( int ) HID::Mod::RCtrl ];
+        report.modifier |= modifers[ ( int ) HID::Mod::RAlt ];
         break;
       case Keymap::Key::SR6:
         report.modifier |= modifers[ ( int ) HID::Mod::RCmd ];
+        break;
+      case Keymap::Key::RSh:
+        report.modifier |= modifers[ ( int ) HID::Mod::RShift ];
         break;
         /*
       case Keymap::Key::KY: //Make KY disconnect bluetooth.

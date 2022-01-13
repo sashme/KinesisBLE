@@ -7,6 +7,7 @@ Keyboard::Keyboard( void )
     , keymap()
     , hid()
     , power()
+    , led()
 {
   idleTime = 0;
   int batteryLEDOnSeconds = 5;
@@ -16,9 +17,9 @@ Keyboard::Keyboard( void )
 
 void Keyboard::begin( void )
 {
+  led.begin();
   hid.begin();
   matrix.begin();
-  led.begin();
   indicateBatteryLevel();
 }
 
@@ -99,4 +100,3 @@ void Keyboard::sleepCheck( void )
     batteryIndicationCheck();
   }
 }
-

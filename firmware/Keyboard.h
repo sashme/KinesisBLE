@@ -21,8 +21,9 @@ private:
   Matrix matrix;
   Keymap keymap;
   HID hid;
-  LED led;
   Power power;
+  LED led;
+  
   unsigned long idleTime;
   void indicateBatteryLevel( void );
   unsigned long batteryLEDOnDuration;

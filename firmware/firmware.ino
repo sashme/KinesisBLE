@@ -5,7 +5,6 @@
 // ALAN
 
 Keyboard keyboard;
-LED led;
 
 void setup(void)
 {
@@ -21,4 +20,3 @@ void loop(void)
     // sleep to save power
     delay(10);
 }
-

@@ -4,8 +4,8 @@
 
 #define DEBUG 0
 
-#define ADVAN2
-//#define ADVAN1
+//#define ADVAN2
+#define ADVAN1
 
 namespace cfg
 {
